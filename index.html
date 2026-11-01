@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Singing Monsters – Trivselaktivitet</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #173f35, #10253b);
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    h1, h2 {
+      color: #c9f49b;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 42px);
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 25px;
+      margin: 20px 0;
+    }
+
+    .login {
+      max-width: 500px;
+      margin: 12vh auto 0;
+      text-align: center;
+    }
+
+    input {
+      width: 190px;
+      padding: 13px;
+      border: 2px solid #b9ed7c;
+      border-radius: 9px;
+      font-size: 19px;
+      text-align: center;
+      letter-spacing: 3px;
+    }
+
+    button {
+      background: #b9ed7c;
+      color: #173426;
+      border: 0;
+      border-radius: 9px;
+      padding: 13px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 8px 4px;
+    }
+
+    button:hover {
+      background: #d6ffa8;
+    }
+
+    a {
+      color: #a8e9ff;
+    }
+
+    .primary-link {
+      display: inline-block;
+      padding: 12px 18px;
+      margin: 8px 0;
+      border-radius: 10px;
+      background: #b9ed7c;
+      color: #173426;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .primary-link:hover {
+      background: #d6ffa8;
+    }
+
+    .monster-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .monster {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .monster h3 {
+      margin: 0 0 12px;
+      color: #c9f49b;
+    }
+
+    .monster a {
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .error {
+      color: #ffb6b6;
+      min-height: 24px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #b7ccc3;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+
+  <!-- STARTSIDA MED AKTIVITETSKOD -->
+  <section id="login" class="panel login">
+
+    <h1>🎵 My Singing Monsters</h1>
+    <h2>Trivselaktivitet – Plant Island</h2>
+
+    <p>
+      Välkommen! Ange aktivitetskoden
+      som du fått av din lärare.
+    </p>
+
+    <input
+      id="code"
+      type="password"
+      inputmode="numeric"
+      placeholder="Kod"
+      aria-label="Aktivitetskod"
+    >
+
+    <div>
+      <button type="button" onclick="login()">
+        Fortsätt
+      </button>
+    </div>
+
+    <p id="error" class="error" role="alert"></p>
+
+  </section>
+
+
+  <!-- INNEHÅLL EFTER RÄTT KOD -->
+  <section id="content" class="hidden">
+
+    <h1>🎶 My Singing Monsters</h1>
+    <p>Trivselaktivitet – Plant Island</p>
+
+
+    <div class="panel">
+      <h2>🎯 Uppdraget</h2>
+
+      <p>
+        Tillsammans ska ni gestalta olika monster
+        från <em>My Singing Monsters – Plant Island</em>.
+      </p>
+
+      <p>
+        Varje monster har sin egen musikaliska roll.
+        Lyssna på hur ert monster låter,
+        öva på dess ljud och rörelser
+        och samarbeta för att skapa
+        en gemensam föreställning.
+      </p>
+    </div>
+
+
+    <div class="panel">
+      <h2>🎬 Videon ni ska imitera</h2>
+
+      <p>
+        Börja med att titta på videon nedan
+        för att få en bild av hur monstren
+        tillsammans skapar musiken.
+      </p>
+
+      <a
+        class="primary-link"
+        href="https://www.youtube.com/shorts/OU1KF0I9opI"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ▶ Se videon på YouTube
+      </a>
+    </div>
+
+
+    <div class="panel">
+      <h2>👾 Era monster</h2>
+
+      <p>
+        Här hittar ni monstren som ingår
+        i aktiviteten.
+        Klicka på respektive länk för att
+        se hur monstret låter och uppträder.
+      </p>
+
+      <div id="monsters" class="monster-grid"></div>
+    </div>
+
+
+    <div class="panel">
+      <h2>🌱 Möjlig vidareutveckling</h2>
+
+      <p>
+        Om ni vill utveckla aktiviteten
+        ytterligare kan ni även använda
+        följande monster:
+      </p>
+
+      <div id="extras" class="monster-grid"></div>
+    </div>
+
+
+    <div class="panel">
+      <h2>⏰ Träning och uppträdande</h2>
+
+      <p>
+        Träningen gör ni tillsammans
+        på fritiden.
+      </p>
+
+      <p>
+        När ni känner er redo kan ni
+        få uppträda i klassrummet.
+        Håll uppträdandet till
+        <strong>högst 2 minuter</strong>.
+      </p>
+    </div>
+
+
+    <div class="panel">
+      <h2>🤝 Tänk på!</h2>
+
+      <p>
+        Lyssna på varandra, våga prova
+        och bidra till en positiv gemenskap.
+      </p>
+
+      <p>
+        Det viktiga är att ni samarbetar,
+        har roligt och skapar något tillsammans!
+      </p>
+    </div>
+
+    <button type="button" onclick="logout()">
+      ← Tillbaka till startsidan
+    </button>
+
+    <footer>
+      My Singing Monsters – Trivselaktivitet
+    </footer>
+
+  </section>
+
+</main>
+
+
+<script>
+  // Enkel aktivitetskod.
+  // OBS: Detta är inte ett säkert åtkomstskydd.
+  const ACCESS_CODE = "101010";
+
+  const monsters = [
+    {
+      name: "Mammott",
+      url: "https://www.youtube.com/shorts/tWacg674spc"
+    },
+    {
+      name: "Fwog",
+      url: "https://www.youtube.com/shorts/4WtZG1NzV7c"
+    },
+    {
+      name: "Noggin",
+      url: "https://www.youtube.com/shorts/PbedECfYlgs"
+    },
+    {
+      name: "Maw",
+      url: "https://www.youtube.com/shorts/DBW_8PQghog"
+    },
+    {
+      name: "Potbelly",
+      url: "https://www.youtube.com/watch?v=gKFvGCe7fUE&t=2s"
+    },
+    {
+      name: "Oaktopus",
+      url: "https://www.youtube.com/shorts/YCtnlD250Ks"
+    },
+    {
+      name: "Furcorn",
+      url: "https://www.youtube.com/shorts/SWiAAoy_MSU"
+    },
+    {
+      name: "Entbrat",
+      url: "https://www.youtube.com/shorts/awIdyLb40lU"
+    }
+  ];
+
+  const extras = [
+    {
+      name: "Shrubb",
+      url: "https://www.youtube.com/shorts/LfhvKC9ATtA"
+    },
+    {
+      name: "Toe Jammer",
+      url: "https://www.youtube.com/shorts/Bebck5PtWrQ"
+    },
+    {
+      name: "Dipsters",
+      url: "https://www.youtube.com/shorts/0hCG4ARXyD8"
+    }
+  ];
+
+
+  function login() {
+    const enteredCode =
+      document.getElementById("code").value.trim();
+
+    if (enteredCode === ACCESS_CODE) {
+      document.getElementById("login")
+        .classList.add("hidden");
+
+      document.getElementById("content")
+        .classList.remove("hidden");
+
+      document.getElementById("error")
+        .textContent = "";
+
+      window.scrollTo(0, 0);
+
+    } else {
+      document.getElementById("error")
+        .textContent = "Fel kod. Försök igen.";
+    }
+  }
+
+
+  function logout() {
+    document.getElementById("content")
+      .classList.add("hidden");
+
+    document.getElementById("login")
+      .classList.remove("hidden");
+
+    document.getElementById("code").value = "";
+
+    window.scrollTo(0, 0);
+  }
+
+
+  document.getElementById("code")
+    .addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        login();
+      }
+    });
+
+
+  function createMonsterCard(name, url) {
+    const card = document.createElement("div");
+    card.className = "monster";
+
+    const title = document.createElement("h3");
+    title.textContent = "👾 " + name;
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "▶ Se " + name + " på YouTube";
+
+    card.appendChild(title);
+    card.appendChild(link);
+
+    return card;
+  }
+
+
+  const monsterContainer =
+    document.getElementById("monsters");
+
+  monsters.forEach(monster => {
+    monsterContainer.appendChild(
+      createMonsterCard(monster.name, monster.url)
+    );
+  });
+
+
+  const extraContainer =
+    document.getElementById("extras");
+
+  extras.forEach(monster => {
+    extraContainer.appendChild(
+      createMonsterCard(monster.name, monster.url)
+    );
+  });
+</script>
+
+</body>
+</html>
